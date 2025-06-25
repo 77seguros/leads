@@ -1,0 +1,360 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;1,600;1,700&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,600&display=swap");
+
+.blue-title {
+  color: #00f0ff;
+  font-weight: 800;
+  font-family: Montserrat;
+}
+.blue {
+  color: #00f0ff;
+}
+.txt_dark-blue {
+  color: #2b50bb;
+}
+
+.description {
+  color: #7d7d7d;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 32px 29px 12px 29px;
+  top: 0;
+  z-index: 20;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px 0px #00000020;
+
+  &.isDesktop {
+    padding: 32px 64px 12px 64px;
+  }
+
+  .button {
+    position: relative;
+    margin-top: 22px;
+
+    .header_icon {
+      position: absolute;
+      left: 0;
+      font-size: 23px;
+      margin-left: 16px;
+      transform: translateY(-2px);
+      cursor: pointer;
+    }
+  }
+}
+
+.section-presentation {
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  .bg-video {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: -400px;
+    z-index: -1;
+    overflow: hidden;
+
+    @media (min-width: 980px) {
+      width: 100vw !important;
+      object-fit: cover;
+      left: 0;
+    }
+  }
+
+  .presentation-contant {
+    z-index: 10;
+
+    @media (min-width: 980px) {
+      width: 50%;
+    }
+
+    .title {
+      color: #fff;
+    }
+
+    .section-presentation_subtitle {
+      margin: 14px 0 16px 0;
+    }
+
+    .for-autos {
+      color: #00f0ff;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-presentation_show-coverage {
+      margin: 14px 0 22px 0;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+    }
+
+    .button {
+      margin-top: 32px;
+      background: #114881;
+    }
+  }
+}
+
+.bgGray {
+  background-color: #e5e7eb;
+}
+
+.title-autos-section {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 44px 0 22px 29px;
+
+  @media (min-width: 980px) {
+    margin: 44px 0 22px 64px;
+  }
+}
+
+.autos-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    padding: 0 29px 44px 29px;
+    gap: 32px;
+  }
+
+  @media (min-width: 980px) {
+    & > div {
+      padding: 0 64px 44px 64px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 26px;
+      justify-content: center;
+    }
+  }
+}
+
+.video {
+  width: 100% !important;
+  max-width: 564px;
+  height: 220px;
+  margin: 22px 0 44px 0;
+
+  @media (min-width: 980px) {
+    height: 320px;
+  }
+}
+
+.section-institution {
+  padding: 44px 29px;
+
+  @media (min-width: 980px) {
+    padding: 44px 64px;
+  }
+
+  .section-institution_title-info {
+    font-size: 22px;
+  }
+
+  .section-institution_description-info {
+    margin-top: 22px;
+    font-size: 18px;
+    color: #505050;
+  }
+
+  .show-me-details {
+    font-weight: 700;
+    margin-top: 16px;
+  }
+
+  .containerCardsInfo {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    row-gap: 22px;
+
+    @media (min-width: 980px) {
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 26px;
+    }
+  }
+}
+
+.padding {
+  padding: 44px 29px;
+
+  @media (min-width: 980px) {
+    padding: 44px 64px;
+  }
+}
+.carr-protection {
+  img {
+    width: 356px;
+    height: 195px;
+    object-fit: contain;
+  }
+  .carr-protection_container-title {
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .carr-protection_title {
+      max-width: 800px;
+      font-size: 22px;
+      margin-left: 12px;
+      color: #2b2b2b;
+    }
+  }
+
+  .carr-protection_subTitle {
+    max-width: 800px;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #505050;
+  }
+
+  .carr-protection_description {
+    max-width: 800px;
+    font-size: 16px;
+    color: #505050;
+    margin-bottom: 16px;
+  }
+  ul {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+
+      p {
+        margin-left: 6px;
+        font-size: 16px;
+        color: #505050;
+      }
+    }
+  }
+
+  @media (min-width: 980px) {
+    .button {
+      max-width: 300px;
+    }
+  }
+}
+
+.consultant {
+  padding: 44px 29px;
+  max-width: 800px;
+
+  @media (min-width: 980px) {
+    padding: 44px 64px;
+  }
+
+  .consultant_title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .consultant_info {
+    color: #505050;
+  }
+
+  @media (min-width: 980px) {
+    .button {
+      max-width: 300px;
+    }
+  }
+}
+.insta {
+  border-radius: 4px;
+  @media (min-width: 980px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .insta_bg-img-container {
+    position: relative;
+
+    @media (min-width: 980px) {
+      max-width: 480px;
+
+      img {
+        width: 100%;
+        height: 500px !important;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 600px;
+      z-index: 1;
+      object-fit: cover;
+    }
+
+    .bgGradient {
+      border-radius: 4px;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      position: absolute;
+      background: linear-gradient(
+        180deg,
+        rgb(138, 58, 185) 0%,
+        rgba(188, 42, 141, 0.25) 50%,
+        rgba(252, 204, 99, 0) 100%
+      );
+    }
+
+    .insta_title {
+      padding: 16px;
+      position: absolute;
+      z-index: 10;
+      font-size: 22px;
+      color: #fff;
+      top: 32px;
+    }
+
+    .btnInsta {
+      width: 90%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 32px;
+      z-index: 10;
+      background: linear-gradient(
+        90deg,
+        rgb(138, 58, 185) 0%,
+        rgb(188, 42, 142) 50%,
+        rgb(252, 204, 99) 100%
+      );
+      cursor: pointer;
+
+      .insta-icon {
+        position: absolute;
+        left: 0;
+        margin-left: 16px;
+        transform: scale(1.3);
+      }
+    }
+  }
+}

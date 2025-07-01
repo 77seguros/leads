@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get, update } from "firebase/database";
+import { getDatabase, ref, get, update, push } from "firebase/database";
 import { getAnalytics, logEvent, isSupported } from "firebase/analytics";
 import Logo77Seguros from "../assets/seguros77";
 import * as prismic from '@prismicio/client'
 import LogoGrande from "@/assets/seguros77All";
 import BGImg from "@/assets/bgImg";
+import { Button, Form, Row, Input } from "antd";
 
 const Home = () => {
   const firebaseConfig = {
@@ -28,6 +29,8 @@ const Home = () => {
   const [fila, setFila] = useState<string>();
   const [dataConsultor, setDataConsultor] = useState<any>(null);
   const [analytics, setAnalytics] = useState<any>(null);
+  const [disabled, setDisabled] = useState(true);
+  const [form] = Form.useForm();
 
   function enviarWhatsApp(numero: string, mensagem = "") {
     const mensagemEncode = encodeURIComponent(mensagem);
@@ -36,16 +39,36 @@ const Home = () => {
     window.open(url, "_blank");
   }
 
+  function checkFormValidity() {
+    const requiredFields = ['nome', 'celular', 'placa'];
+    const hasErrors = form.getFieldsError().some(({ errors }) => errors.length > 0);
+    const requiredTouched = form.isFieldsTouched(requiredFields, true);
+    const allFieldsValid = !hasErrors;
+
+    setDisabled(!(requiredTouched && allFieldsValid));
+  }
+
+  useEffect(() => {
+    checkFormValidity();
+  }, [])
+
 
   const salvarEvento = async () => {
     const campanha = await client.getSingle('campanha_nome');
     if (fila || fila === '1') {
-      enviarWhatsApp(dataConsultor?.representante_numero, `Olá!
-Gostaria de fazer uma cotação do meu veículo, pode me ajudar?`);
+      enviarWhatsApp(dataConsultor?.representante_numero, `Olá, meu nome é ${form.getFieldValue('nome')}, gostaria de saber mais informações para asegurar meu veículo com placa ${form.getFieldValue('placa')}.`);
 
-      logEvent(analytics, `${campanha?.data?.campanha_nome|| 'consultorClick'}`, {
+      logEvent(analytics, `${campanha?.data?.campanha_nome || 'consultorClick'}`, {
         consultor_id: dataConsultor?.representante_nome
       });
+
+      const novoLead = {
+        nome: form.getFieldValue('nome'),
+        celular: form.getFieldValue('celular'),
+        placa: form.getFieldValue('placa')
+      };
+      await push(ref(database, "leads"), novoLead);
+      console.log({ nome: form.getFieldValue('nome'), celular: form.getFieldValue('celular'), placa: form.getFieldValue('placa') })
     }
   };
 
@@ -102,7 +125,7 @@ Gostaria de fazer uma cotação do meu veículo, pode me ajudar?`);
   return (
     <div className="home-container">
       <div className={`bgEffect ${dataConsultor ? 'animation' : ''}`} />
-      {
+      {/* {
         dataConsultor
           ? (
             <div className={`dashboard ${dataConsultor ? 'cardAnimation' : ''}`}>
@@ -114,9 +137,61 @@ Gostaria de fazer uma cotação do meu veículo, pode me ajudar?`);
             </div>
           )
           : <Logo77Seguros className="loading-icon" />
-      }
+      } */}
+      <Form
+        form={form}
+        onFinish={salvarEvento}
+        layout="vertical"
+        // className={'form'}
+        onFieldsChange={checkFormValidity}
+        className={`dashboard ${dataConsultor ? 'cardAnimation' : ''}`}
+      >
+        <Row gutter={0}>
+          <Form.Item
+            className={'customInput'}
+            name="nome"
+            label={'Nome'}
+            rules={[{ message: 'Campo Obrigatório' }]}
+          >
+            <Input size="large" placeholder="Digite seu Nome" />
+          </Form.Item>
+        </Row>
 
-    </div>
+        <Row gutter={0}>
+          <Form.Item
+            className={'customInput'}
+            name="celular"
+            label={'Celular'}
+            rules={[{ message: 'Campo Obrigatório' }]}
+          >
+            <Input size="large" placeholder="Digite o número do seu celular" />
+          </Form.Item>
+        </Row>
+        <Row gutter={0}>
+          <Form.Item
+            className={'customInput'}
+            name="placa"
+            label={'Placa do veículo'}
+            rules={[{ message: 'Campo Obrigatório' }]}
+          >
+            <Input size="large" placeholder="Digite a placa do seu veículo" />
+          </Form.Item>
+        </Row>
+
+
+        <Button
+          type='primary'
+          className="foms_button"
+          onClick={salvarEvento}
+          disabled={disabled}
+          size="large"
+        >
+          Enviar Dados
+        </Button>
+        <h1 className="page-icon"><LogoGrande /></h1>
+      </Form >
+
+    </div >
   );
 };
 

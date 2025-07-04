@@ -142,11 +142,11 @@ const Home = () => {
         form={form}
         onFinish={salvarEvento}
         layout="vertical"
-        // className={'form'}
         onFieldsChange={checkFormValidity}
         className={`dashboard ${dataConsultor ? 'cardAnimation' : ''}`}
       >
         <Row gutter={0}>
+          <h1 className="formsTile">Preencha os dados e fale com alguém da nossa equipe</h1>
           <Form.Item
             className={'customInput'}
             name="nome"
@@ -188,7 +188,7 @@ const Home = () => {
         >
           Enviar Dados
         </Button>
-        <h1 className="page-icon"><LogoGrande /></h1>
+        <h2 className="page-icon"><LogoGrande /></h2>
       </Form >
 
     </div >
